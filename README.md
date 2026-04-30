@@ -1,7 +1,7 @@
 # RootRemover (CVE-2026-31431)
 Temporarily removes the root password, uses CVE-2026-31431 to allow escalation to root without knowing the current user's password.
 
-Please use responsibly, only on systems you are authorised to test.
+Please use responsibly, only on systems you are authorised to test. Currently only seems to work on Debian derivatives.
 
 Actual exploit code is from [rootsecdev](https://github.com/rootsecdev/cve_2026_31431)'s repo, I just change the bytes written for reasons listed below.
 
