@@ -17,5 +17,6 @@ Disadvantages of this approach:
 - Root must not use '`*LK*`' or '`*NP*`' in password field (could be fixed with chained writes, I just haven't yet)
 - Elevation may be easier to identify via commandline of `su` (no arguments always means root, UID patch PoC just looks like switching to your own user in the logs because that's what's happening. This is a flaw shared with the first PoC at https://copy.fail, though seems it can be fixed there)
 - Anyone can log in as root, in the previous version you still need your password. This is designed more for if you get a shell with something like `www-data`, not a machine where you have a known password.
+- Appears to mostly work on Debian-based OSes so far due to differences in whether /etc/passwd or /etc/shadow are honoured first (possibly fixable but likely time consuming)
 
 In my opinion the advantages of this approach outweigh the disadvantages, so I decided to write it.
