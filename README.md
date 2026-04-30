@@ -3,12 +3,19 @@ Temporarily removes the root password, uses CVE-2026-31431 to allow escalation t
 
 Please use responsibly, only on systems you are authorised to test.
 
-Advantages:
+Actual exploit code is from [rootsecdev](https://github.com/rootsecdev/cve_2026_31431)'s repo, I just change the bytes written for reasons listed below.
+
+The PoC this is based on essentially replaced your UID with all 0s in /etc/passwd, effectively giving you root. This approach removes root's password instead, so when you run `su` you get instant root. This keeps your user intact for stability and grants you root's GID too, with the caveat that any user on the machine can elevate until cleanup.
+
+Advantages of this approach:
 - Don’t need to know current user password
 - Works on any UID (existing PoC could be modified to work on less than 4 digit too and could chain for more digits)
-- Keeps your user’s UID intact (for other tasks running on the system etc)
+- Keeps your user’s UID intact (stability for other tasks to run on the system under your user etc, don't want to start writing files with UID 0)
 
-Disadvantages:
+Disadvantages of this approach:
 - Root must not have hash in /etc/passwd (this is a security concern in itself)
 - Root must not use '`*LK*`' or '`*NP*`' in password field (could be fixed with chained writes)
 - Elevation may be easier to identify via commandline of `su` (no arguments always means root, UID patch PoC just looks like switching to your own user in the logs. This is a flaw shared with the first PoC at https://copy.fail)
+- Anyone can log in as root, in the previous version you still need your password. This is designed more for if you get a shell with something like `www-data`, not a machine where you have a known password.
+
+In my opinion the advantages of this approach outweigh the disadvantages, so I decided to write it.
