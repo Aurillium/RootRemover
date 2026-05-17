@@ -17,6 +17,9 @@ With no arguments, the program runs, makes the changes to `/etc/passwd` and then
 - `--clean` will only clean up from a previous run, not run the exploit.
 - `--shell` will not clean up, but will spawn a root shell with `su` after running the exploit.
 
+<img width="817" height="318" alt="image" src="https://github.com/user-attachments/assets/3b415f52-dc99-4146-a254-b1eec6e81655" />
+
+
 ## What Changes?
 <img width="478" height="96" alt="image" src="https://github.com/user-attachments/assets/da39bf6e-4231-4081-a8f7-869bf9f73d4a" />
 
